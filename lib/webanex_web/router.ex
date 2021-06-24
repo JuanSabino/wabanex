@@ -7,6 +7,8 @@ defmodule WebanexWeb.Router do
 
   scope "/api", WebanexWeb do
     pipe_through :api
+
+    get  "/", IMCController, :index
   end
 
   # Enables LiveDashboard only for development
