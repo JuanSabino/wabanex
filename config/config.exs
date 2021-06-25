@@ -10,6 +10,10 @@ use Mix.Config
 config :webanex,
   ecto_repos: [Webanex.Repo]
 
+config :webanex, Webanex.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreing_key: [type: :binary_id]
+
 # Configures the endpoint
 config :webanex, WebanexWeb.Endpoint,
   url: [host: "localhost"],
