@@ -1,9 +1,9 @@
-defmodule Webanex.MixProject do
+defmodule Wabanex.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :webanex,
+      app: :wabanex,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Webanex.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Webanex.Application, []},
+      mod: {Wabanex.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

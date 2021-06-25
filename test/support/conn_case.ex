@@ -1,4 +1,4 @@
-defmodule WebanexWeb.ConnCase do
+defmodule WabanexWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule WebanexWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use WebanexWeb.ConnCase, async: true`, although
+  by setting `use WabanexWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,20 +22,20 @@ defmodule WebanexWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import WebanexWeb.ConnCase
+      import WabanexWeb.ConnCase
 
-      alias WebanexWeb.Router.Helpers, as: Routes
+      alias WabanexWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint WebanexWeb.Endpoint
+      @endpoint WabanexWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Webanex.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wabanex.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Webanex.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Wabanex.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

@@ -1,4 +1,4 @@
-defmodule Webanex.IMC do
+defmodule Wabanex.IMC do
   def calculate(%{"filename" => filename}) do
     filename
     |> File.read()

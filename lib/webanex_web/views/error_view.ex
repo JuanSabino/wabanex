@@ -1,5 +1,5 @@
-defmodule WebanexWeb.ErrorView do
-  use WebanexWeb, :view
+defmodule WabanexWeb.ErrorView do
+  use WabanexWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

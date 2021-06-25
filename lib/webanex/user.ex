@@ -1,4 +1,4 @@
-defmodule Webanex.User do
+defmodule Wabanex.User do
   use Ecto.Schema
   import Ecto.Changeset
 

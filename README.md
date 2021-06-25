@@ -1,4 +1,4 @@
-# Webanex
+# Wabanex
 
 To start your Phoenix server:
 

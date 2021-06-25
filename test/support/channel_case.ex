@@ -1,4 +1,4 @@
-defmodule WebanexWeb.ChannelCase do
+defmodule WabanexWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule WebanexWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use WebanexWeb.ChannelCase, async: true`, although
+  by setting `use WabanexWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule WebanexWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import WebanexWeb.ChannelCase
+      import WabanexWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint WebanexWeb.Endpoint
+      @endpoint WabanexWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Webanex.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wabanex.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Webanex.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Wabanex.Repo, {:shared, self()})
     end
 
     :ok

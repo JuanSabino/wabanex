@@ -7,19 +7,19 @@
 # General application configuration
 use Mix.Config
 
-config :webanex,
-  ecto_repos: [Webanex.Repo]
+config :wabanex,
+  ecto_repos: [Wabanex.Repo]
 
-config :webanex, Webanex.Repo,
+config :wabanex, Wabanex.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreing_key: [type: :binary_id]
 
 # Configures the endpoint
-config :webanex, WebanexWeb.Endpoint,
+config :wabanex, WabanexWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "eHnxPZ2+8vghZ+3rIk2ez8Ao6KXTCAWGxvnXg8NnBMdk4WzhbAat+rRQsUuSevOA",
-  render_errors: [view: WebanexWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Webanex.PubSub,
+  render_errors: [view: WabanexWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: Wabanex.PubSub,
   live_view: [signing_salt: "dxEQ3gn8"]
 
 # Configures Elixir's Logger

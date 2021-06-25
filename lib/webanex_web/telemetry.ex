@@ -1,4 +1,4 @@
-defmodule WebanexWeb.Telemetry do
+defmodule WabanexWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -31,11 +31,11 @@ defmodule WebanexWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("webanex.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("webanex.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("webanex.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("webanex.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("webanex.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("wabanex.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("wabanex.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("wabanex.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("wabanex.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("wabanex.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
@@ -49,7 +49,7 @@ defmodule WebanexWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {WebanexWeb, :count_users, []}
+      # {WabanexWeb, :count_users, []}
     ]
   end
 end

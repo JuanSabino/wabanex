@@ -1,7 +1,7 @@
-defmodule WebanexWeb.IMCController  do
-  use WebanexWeb, :controller
+defmodule WabanexWeb.IMCController  do
+  use WabanexWeb, :controller
 
-  alias Webanex.IMC
+  alias Wabanex.IMC
 
   def index(conn, params) do
     params

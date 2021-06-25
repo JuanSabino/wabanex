@@ -1,6 +1,6 @@
-defmodule Webanex.Users.Get do
+defmodule Wabanex.Users.Get do
   alias Ecto.UUID
-  alias Webanex.{Repo, User}
+  alias Wabanex.{Repo, User}
 
 
   def call(id) do

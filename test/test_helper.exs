@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Webanex.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Wabanex.Repo, :manual)

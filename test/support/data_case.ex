@@ -1,4 +1,4 @@
-defmodule Webanex.DataCase do
+defmodule Wabanex.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Webanex.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Webanex.DataCase, async: true`, although
+  by setting `use Wabanex.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule Webanex.DataCase do
 
   using do
     quote do
-      alias Webanex.Repo
+      alias Wabanex.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Webanex.DataCase
+      import Wabanex.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Webanex.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Wabanex.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Webanex.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Wabanex.Repo, {:shared, self()})
     end
 
     :ok
