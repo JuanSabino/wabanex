@@ -128,6 +128,83 @@ defmodule WabanexWeb.SchemaTest do
         } = response
     end
 
+    test "when the email already exists, returns an error", %{conn: conn} do
+
+      mutation = """
+        mutation{
+          createUser(input: {
+            email:"teste@123.com",
+            name:"teste",
+            password:"123456"
+          }){
+            id,
+            name,
+            email
+          }
+        }
+      """
+      _res =
+        conn
+        |> post("/api/graphql", %{query: mutation})
+        |> json_response(:ok)
+
+      response =
+        conn
+        |> post("/api/graphql", %{query: mutation})
+        |> json_response(:ok)
+
+
+
+        assert  %{
+          "data" => %{"createUser" => nil}, "errors" => [%{"locations" => [%{"column" => 5, "line" => 2}],
+          "message" => "email has already been taken", "path" => ["createUser"]}]
+        } = response
+    end
+
+    test "when all params are invalid, returns an error", %{conn: conn} do
+
+      mutation = """
+        mutation{
+          createUser(input: {
+            email:"teste123.com",
+            name:"t",
+            password:"1"
+          }){
+            id,
+            name,
+            email
+          }
+        }
+      """
+      response =
+        conn
+        |> post("/api/graphql", %{query: mutation})
+        |> json_response(:ok)
+
+
+
+        assert  %{
+          "data" => %{"createUser" => nil},
+          "errors" => [
+            %{
+              "locations" => [%{"column" => 5, "line" => 2}],
+              "message" => "email has invalid format",
+              "path" => ["createUser"]
+            },
+            %{
+              "locations" => [%{"column" => 5, "line" => 2}],
+              "message" => "name should be at least 2 character(s)",
+              "path" => ["createUser"]
+            },
+            %{
+              "locations" => [%{"column" => 5, "line" => 2}],
+              "message" => "password should be at least 6 character(s)",
+              "path" => ["createUser"]
+            }
+          ]
+        } = response
+    end
+
 
   end
 end
