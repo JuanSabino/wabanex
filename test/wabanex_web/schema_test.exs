@@ -7,7 +7,13 @@ defmodule WabanexWeb.SchemaTest do
   describe "user queries" do
     test "when a valid id is given, returns the user", %{conn: conn} do
 
-      params = %{name: "Juan", email: "juan@teste.com", password: "123456"}
+      params = %{
+        name: "Juan",
+        email: "juan@teste.com",
+        password: "123456",
+        birthday_date: "1990-01-01",
+        height: 1.65
+    }
 
       {:ok, %User{id: user_id}} = Create.call(params)
 
@@ -104,7 +110,9 @@ defmodule WabanexWeb.SchemaTest do
           createUser(input: {
             email:"teste@123.com",
             name:"teste",
-            password:"123456"
+            password:"123456",
+            birthday_date:"1990-01-01",
+            height:1.65
           }){
             id,
             name,
@@ -135,7 +143,10 @@ defmodule WabanexWeb.SchemaTest do
           createUser(input: {
             email:"teste@123.com",
             name:"teste",
-            password:"123456"
+            password:"123456",
+            birthday_date:"1990-01-01",
+            height:1.65
+
           }){
             id,
             name,
@@ -161,7 +172,7 @@ defmodule WabanexWeb.SchemaTest do
         } = response
     end
 
-    test "when all params are invalid, returns an error", %{conn: conn} do
+    test "when params are invalid, returns an error", %{conn: conn} do
 
       mutation = """
         mutation{
@@ -184,22 +195,10 @@ defmodule WabanexWeb.SchemaTest do
 
 
         assert  %{
-          "data" => %{"createUser" => nil},
           "errors" => [
             %{
-              "locations" => [%{"column" => 5, "line" => 2}],
-              "message" => "email has invalid format",
-              "path" => ["createUser"]
-            },
-            %{
-              "locations" => [%{"column" => 5, "line" => 2}],
-              "message" => "name should be at least 2 character(s)",
-              "path" => ["createUser"]
-            },
-            %{
-              "locations" => [%{"column" => 5, "line" => 2}],
-              "message" => "password should be at least 6 character(s)",
-              "path" => ["createUser"]
+              "locations" => [%{"column" => 16, "line" => 2}],
+              "message" => "Argument \"input\" has invalid value {email: \"teste123.com\", name: \"t\", password: \"1\"}.\nIn field \"height\": Expected type \"Float!\", found null.\nIn field \"birthdayDate\": Expected type \"String!\", found null."
             }
           ]
         } = response

@@ -5,12 +5,16 @@ defmodule Wabanex.User do
   alias Wabanex.Training
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  @fields [:email, :password, :name]
+  @fields [:email, :password, :name, :birthday_date, :height]
 
   schema "users" do
     field :email, :string
     field :name, :string
     field :password, :string
+
+    field :birthday_date, :date
+    field :height, :float
+
     has_many :trainings, Training
 
     timestamps()

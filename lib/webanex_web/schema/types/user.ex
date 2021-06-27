@@ -9,12 +9,16 @@ defmodule WabanexWeb.Schema.Types.User do
     field :name, non_null(:string)
     field :email, non_null(:string)
     field :trainings, list_of(:training)
+    field :birthday_date, :string
+    field :height, :float
   end
 
   input_object :create_user_input do
     field :name, non_null(:string), description: "Users name"
     field :email, non_null(:string), description: "Users email"
     field :password, non_null(:string), description: "Users password"
+    field :birthday_date, non_null(:string), description: "Users birthday date"
+    field :height, non_null(:float), description: "Users height"
   end
 
 end

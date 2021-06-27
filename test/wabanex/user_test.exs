@@ -6,13 +6,25 @@ defmodule Wabanex.UserTest do
 
   describe "changeset/1" do
     test "when all params are valid, returns a valid changeset" do
-      params = %{name: "Juan", email: "juan@teste.com", password: "123456"}
+      params = %{
+        name: "Juan",
+        email: "juan@teste.com",
+        password: "123456",
+        birthday_date: "1990-01-01",
+        height: 1.65
+      }
 
       response = User.changeset(params)
 
       assert %Ecto.Changeset{
         valid?: true,
-        changes: %{email: "juan@teste.com", name: "Juan", password: "123456"},
+        changes: %{
+          birthday_date: ~D[1990-01-01],
+          email: "juan@teste.com",
+          height: 1.65,
+          name: "Juan",
+          password: "123456"
+        },
         errors: []
       } = response
     end
@@ -25,7 +37,9 @@ defmodule Wabanex.UserTest do
       expected_response = %{
         email: ["has invalid format"],
         name: ["should be at least 2 character(s)"],
-        password: ["should be at least 6 character(s)"]
+        password: ["should be at least 6 character(s)"],
+        birthday_date: ["can't be blank"],
+        height: ["can't be blank"]
       }
       assert expected_response == errors_on(response)
     end
