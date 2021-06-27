@@ -1,6 +1,7 @@
 defmodule WabanexWeb.Schema.Types.User do
   use Absinthe.Schema.Notation
 
+  import_types WabanexWeb.Schema.Types.Weight
 
 
   @desc "Logic user representation"
@@ -9,6 +10,7 @@ defmodule WabanexWeb.Schema.Types.User do
     field :name, non_null(:string)
     field :email, non_null(:string)
     field :trainings, list_of(:training)
+    field :weights, list_of(:user_weight)
     field :birthday_date, :string
     field :height, :float
   end

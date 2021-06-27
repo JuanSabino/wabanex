@@ -2,7 +2,7 @@ defmodule Wabanex.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Wabanex.Training
+  alias Wabanex.{Training, UserWeight}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @fields [:email, :password, :name, :birthday_date, :height]
@@ -16,6 +16,7 @@ defmodule Wabanex.User do
 
     field :birthday_date, :date
     field :height, :float
+    has_many :weights, UserWeight
 
     has_many :trainings, Training
 
@@ -23,6 +24,9 @@ defmodule Wabanex.User do
   end
 
   def changeset(params) do
+
+    params = Wabanex.UserWeight.calculateIMC(params)
+
     %__MODULE__{}
     |> cast(params, @fields)
     |> validate_required(@fields)
@@ -30,6 +34,7 @@ defmodule Wabanex.User do
     |> validate_length(:name, min: 2)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint([:email])
+    |> cast_assoc(:weights)
   end
 
   #TODO: Corrigir validação

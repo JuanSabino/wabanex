@@ -19,9 +19,15 @@ defmodule Wabanex.Users.Get do
   defp handle_response({:ok, uuid}) do
     case Repo.get(User, uuid) do
       nil -> {:error, "User not found"}
-      user -> {:ok, load_training(user)}
+      user -> {:ok, load_data(user)}
     end
 
+  end
+
+  defp load_data(user) do
+    user
+    |> load_training
+    |> load_weight
   end
 
   defp load_training(user) do
@@ -31,5 +37,9 @@ defmodule Wabanex.Users.Get do
       from training in Training,
         where: ^today >= training.start_date and ^today <= training.end_date
     Repo.preload(user, trainings: {first(query, :inserted_at), :exercises})
+  end
+
+  defp load_weight(user) do
+    Repo.preload(user, :weights)
   end
 end
