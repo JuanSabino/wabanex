@@ -21,4 +21,12 @@ defmodule WabanexWeb.Schema.Types.User do
     field :height, non_null(:float), description: "Users height"
   end
 
+  input_object :update_user_input do
+    field :name, (:string), description: "Users name"
+    field :id, (:string), description: "Users id"
+    field :password, (:string), description: "Users password"
+    field :birthday_date, (:string), description: "Users birthday date"
+    field :height, (:float), description: "Users height"
+  end
+
 end

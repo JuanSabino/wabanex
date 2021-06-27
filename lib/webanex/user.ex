@@ -6,8 +6,10 @@ defmodule Wabanex.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @fields [:email, :password, :name, :birthday_date, :height]
+  @updateFields [:id, :password, :name, :birthday_date, :height]
 
   schema "users" do
+
     field :email, :string
     field :name, :string
     field :password, :string
@@ -28,5 +30,16 @@ defmodule Wabanex.User do
     |> validate_length(:name, min: 2)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint([:email])
+  end
+
+  #TODO: Corrigir validação
+  def changeset(user, params) do
+    #%__MODULE__{}
+    cast(user, params, @updateFields)
+    #|> validate_required([:id])
+    #|> validate_length(:password, min: 6)
+    #|> validate_length(:name, min: 2)
+    #|> validate_format(:email, ~r/@/)
+    #|> unique_constraint([:email])
   end
 end

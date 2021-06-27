@@ -13,7 +13,7 @@ defmodule WabanexWeb.SchemaTest do
         password: "123456",
         birthday_date: "1990-01-01",
         height: 1.65
-    }
+      }
 
       {:ok, %User{id: user_id}} = Create.call(params)
 
@@ -102,7 +102,7 @@ defmodule WabanexWeb.SchemaTest do
     end
   end
 
-  describe "users mutations" do
+  describe "createUsers mutations" do
     test "when all params are valid, creates the user", %{conn: conn} do
 
       mutation = """
@@ -205,5 +205,51 @@ defmodule WabanexWeb.SchemaTest do
     end
 
 
+  end
+
+
+  describe "updateUsers mutations" do
+    test "when all params are valid, updates the user", %{conn: conn} do
+
+      params = %{
+        name: "Juan",
+        email: "juan@teste.com",
+        password: "123456",
+        birthday_date: "1990-01-01",
+        height: 1.65
+      }
+
+      {:ok, %User{id: user_id}} = Create.call(params)
+
+      mutation = """
+        mutation{
+          updateUser(input: {
+            id: "#{user_id}",
+            name:"teste",
+            password:"12345678",
+            birthday_date:"1990-01-28",
+            height:1.90
+          }){
+            id,
+            name,
+            email
+          }
+        }
+      """
+      response =
+        conn
+        |> post("/api/graphql", %{query: mutation})
+        |> json_response(:ok)
+
+
+
+        assert  %{
+          "data" => %{
+            "updateUser" => %{
+              "email" => "juan@teste.com", "id" => _id, "name" => "teste"
+            }
+          }
+        } = response
+    end
   end
 end

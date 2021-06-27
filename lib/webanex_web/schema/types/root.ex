@@ -33,6 +33,14 @@ defmodule WabanexWeb.Schema.Types.Root do
       middleware TranslateErrors
     end
 
+    field :update_user, type: :user do
+      arg :input, :update_user_input
+
+      #resolve fn params, context -> UserResolver.get(params, context) end
+      resolve &UserResolver.update/2
+      middleware TranslateErrors
+    end
+
 
     field :create_training, type: :training do
       arg :input, non_null(:create_training_input)
